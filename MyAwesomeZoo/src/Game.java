@@ -55,5 +55,6 @@ public class Game {
         }
 
         aRandomAnimal.speak();
+
     }
 }
