@@ -9,8 +9,5 @@ public class Demo {
 
         CodeKampJFrame frame1 = new CodeKampJFrame();
         frame1.setVisible(true);
-
-        ThreeButtonJFrame frame2 = new ThreeButtonJFrame();
-        frame2.setVisible(true);
     }
 }

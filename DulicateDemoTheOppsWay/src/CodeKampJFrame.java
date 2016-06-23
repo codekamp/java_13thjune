@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cerebro on 22/06/16.
@@ -11,6 +13,7 @@ public class CodeKampJFrame extends JFrame implements ActionListener {
     private JLabel textLabel;
     private JButton changeColorButton;
     protected JButton duplicateButton;
+    private List<CodeKampJFrame> childWindows;
 
     public CodeKampJFrame() {
         super();
@@ -33,6 +36,8 @@ public class CodeKampJFrame extends JFrame implements ActionListener {
         this.duplicateButton.addActionListener(this);
         panel.add(this.duplicateButton);
 
+        this.childWindows = new ArrayList<>();
+
         this.setSize(500, 500);
 
     }
@@ -42,11 +47,18 @@ public class CodeKampJFrame extends JFrame implements ActionListener {
         if (e.getSource() == this.changeColorButton) {
             if (this.textLabel.getForeground().equals(Color.red)) {
                 this.textLabel.setForeground(Color.green);
+                for (int i = 0; i < this.childWindows.size(); i++) {
+                    this.childWindows.get(i).textLabel.setForeground(Color.green);
+                }
             } else {
                 this.textLabel.setForeground(Color.red);
+                for (int i = 0; i < this.childWindows.size(); i++) {
+                    this.childWindows.get(i).textLabel.setForeground(Color.red);
+                }
             }
         } else {
             CodeKampJFrame frame = new CodeKampJFrame();
+            this.childWindows.add(frame);
             frame.setVisible(true);
         }
     }
