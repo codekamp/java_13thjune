@@ -1,3 +1,5 @@
+import com.sun.org.apache.bcel.internal.classfile.Code;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,13 +12,21 @@ import java.util.List;
  */
 public class CodeKampJFrame extends JFrame implements ActionListener {
 
+    public static int count = 0;
+
     private JLabel textLabel;
     private JButton changeColorButton;
     protected JButton duplicateButton;
     private List<CodeKampJFrame> childWindows;
+    private int number;
 
     public CodeKampJFrame() {
         super();
+
+        CodeKampJFrame.count++;
+
+        this.number = CodeKampJFrame.count;
+        this.setTitle("window " + this.number);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -38,7 +48,7 @@ public class CodeKampJFrame extends JFrame implements ActionListener {
 
         this.childWindows = new ArrayList<>();
 
-        this.setSize(500, 500);
+        this.setSize(200, 200);
 
     }
 
@@ -46,20 +56,24 @@ public class CodeKampJFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.changeColorButton) {
             if (this.textLabel.getForeground().equals(Color.red)) {
-                this.textLabel.setForeground(Color.green);
-                for (int i = 0; i < this.childWindows.size(); i++) {
-                    this.childWindows.get(i).textLabel.setForeground(Color.green);
-                }
+                this.changeColor(Color.green);
             } else {
-                this.textLabel.setForeground(Color.red);
-                for (int i = 0; i < this.childWindows.size(); i++) {
-                    this.childWindows.get(i).textLabel.setForeground(Color.red);
-                }
+                this.changeColor(Color.red);
             }
         } else {
             CodeKampJFrame frame = new CodeKampJFrame();
             this.childWindows.add(frame);
             frame.setVisible(true);
         }
+    }
+
+    public void changeColor(Color color) {
+
+        for (int i = 0; i < this.childWindows.size(); i++) {
+            this.childWindows.get(i).changeColor(color);
+        }
+
+        this.textLabel.setForeground(color);
+        System.out.println("color of window number " + this.number + " changed");
     }
 }
