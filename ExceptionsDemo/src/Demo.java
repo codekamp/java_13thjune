@@ -8,8 +8,9 @@ public class Demo {
 
         try {
             List<String> allFriends = FriendService.fetchFriendlist(10);
-            System.out.println(allFriends.get(0));
-            System.out.println(allFriends.get(1));
+            System.out.println("2nd line of try");
+
+
         } catch (InternetUnavailableException e) {
             //write code to handle the situation when function fails due to
             //unavailablity of internet
@@ -24,6 +25,10 @@ public class Demo {
                     "User id invalid, so we are going to ask user to choose a " +
                             "valid profile"
             );
+        } finally {
+            System.out.println("hello world! this is finally block");
         }
+
+        System.out.println("after try catch");
     }
 }

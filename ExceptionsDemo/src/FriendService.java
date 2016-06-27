@@ -6,8 +6,8 @@ import java.util.List;
  */
 public class FriendService {
 
-    public static boolean internetAvailable = true;
-    public static boolean userIdValid = false;
+    public static boolean internetAvailable = false;
+    public static boolean userIdValid = true;
 
     public static List<String> fetchFriendlist(int UserId) throws InternetUnavailableException, UserIdInvalidException {
 
@@ -16,7 +16,8 @@ public class FriendService {
         }
 
         if (!userIdValid) {
-            throw new UserIdInvalidException();
+            throw new UserIdInvalidException("User id should be positive");
+
         }
 
 
