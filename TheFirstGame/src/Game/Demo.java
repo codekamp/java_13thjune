@@ -21,10 +21,14 @@ public class Demo implements KeyListener {
     private static Image playerImage4;
     private static Image playerImage5;
     private static Image blockImage;
+    private static int playerXCord = 400;
     private static int playerYCord = 315;
     private static int playerYVel = 0;
     private static int playerYAcc = 0;
     private static Random randomGenerator = new Random();
+    private static Rectangle playerRectangle = new Rectangle();
+    private static Rectangle blockRectangle = new Rectangle();
+    private static boolean blockVisible = true;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
@@ -115,17 +119,29 @@ public class Demo implements KeyListener {
                 } else {
                     blockYCord = 355;
                 }
+
+                Demo.blockVisible = true;
+            }
+
+            Demo.blockRectangle.setBounds(blockXCord, blockYCord, 20, 50);
+            Demo.playerRectangle.setBounds(Demo.playerXCord, Demo.playerYCord, 72, 90);
+
+            if(Demo.blockVisible && Demo.playerRectangle.intersects(Demo.blockRectangle)) {
+                Demo.playerXCord -= 25;
+                Demo.blockVisible = false;
             }
 
             graphics1.clearRect(0, 0, 800, 450);
-
             graphics1.setColor(Color.cyan);
             graphics1.fillRect(0, 0, 800, 450);
 
             graphics1.drawImage(Demo.grassImage,0,405,null);
 
-            graphics1.drawImage(currentPlayerImage,400,Demo.playerYCord,null);
-            graphics1.drawImage(Demo.blockImage,blockXCord,blockYCord,null);
+            graphics1.drawImage(currentPlayerImage,Demo.playerXCord,Demo.playerYCord,null);
+
+            if(Demo.blockVisible) {
+                graphics1.drawImage(Demo.blockImage, blockXCord, blockYCord, null);
+            }
         }
 
     }
