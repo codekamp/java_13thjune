@@ -3,7 +3,7 @@ package Main;
 /**
  * Created by cerebro on 30/06/16.
  */
-public class Demo implements Runnable {
+abstract public class Demo implements Runnable {
 
     volatile public static int randomVar = 10;
 
@@ -46,4 +46,6 @@ public class Demo implements Runnable {
     public void run() {
         Demo.countIndians();
     }
+
+    abstract public void someFunction();
 }

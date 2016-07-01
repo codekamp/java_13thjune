@@ -1,7 +1,9 @@
+import java.awt.event.KeyListener;
+
 /**
  * Created by cerebro on 15/06/16.
  */
-public class Animal {
+abstract public class Animal implements KeyListener {
 
     public String name;
 
@@ -13,9 +15,8 @@ public class Animal {
         System.out.println("tak tak tak tak!");
     }
 
-    public void speak() {
-        System.out.println("Animal Animal!");
-    }
+
+    abstract public void speak();
 
     //   github.com/codekamp
 }

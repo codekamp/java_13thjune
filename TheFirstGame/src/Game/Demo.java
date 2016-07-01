@@ -5,14 +5,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.Random;
+
 
 /**
  * Created by cerebro on 27/06/16.
  */
 
-public class Demo implements KeyListener {
+public class Demo implements KeyListener, MouseListener {
 
     private static Image grassImage;
     private static Image playerImage1;
@@ -29,6 +32,7 @@ public class Demo implements KeyListener {
     private static Rectangle playerRectangle = new Rectangle();
     private static Rectangle blockRectangle = new Rectangle();
     private static boolean blockVisible = true;
+    private static boolean gamePaused = false;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
@@ -40,7 +44,9 @@ public class Demo implements KeyListener {
         Dimension dimension1 = new Dimension(800, 450);
         panel.setPreferredSize(dimension1);
         panel.setFocusable(true);
-        panel.addKeyListener(new Demo());
+        Demo demo1 = new Demo();
+        panel.addKeyListener(demo1);
+        panel.addMouseListener(demo1);
         frame.pack();
 
         frame.setVisible(true);
@@ -93,6 +99,10 @@ public class Demo implements KeyListener {
                 e.printStackTrace();
             }
 
+            if(Demo.gamePaused) {
+                continue;
+            }
+
             playerImageIndex++;
 
             playerImageIndex = playerImageIndex % 7;
@@ -142,6 +152,9 @@ public class Demo implements KeyListener {
             if(Demo.blockVisible) {
                 graphics1.drawImage(Demo.blockImage, blockXCord, blockYCord, null);
             }
+
+            graphics1.setColor(Color.red);
+            graphics1.fillRect(740, 10, 50, 50);
         }
 
     }
@@ -164,4 +177,31 @@ public class Demo implements KeyListener {
 
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        if (e.getX() > 740 && e.getX() < 790 && e.getY() > 10 && e.getY() < 60) {
+            Demo.gamePaused = !Demo.gamePaused;
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
