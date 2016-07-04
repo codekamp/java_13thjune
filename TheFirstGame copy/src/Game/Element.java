@@ -4,14 +4,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Random;
 
 /**
  * Created by cerebro on 01/07/16.
  */
 abstract public class Element {
-
-    protected static Random randomGenerator = new Random();
 
     protected int x = 0;
     protected int y = 0;

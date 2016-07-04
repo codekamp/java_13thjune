@@ -1,3 +1,4 @@
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
@@ -16,7 +17,15 @@ abstract public class Animal implements KeyListener {
     }
 
 
-    abstract public void speak();
+    public abstract void speak();
 
     //   github.com/codekamp
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+
 }

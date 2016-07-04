@@ -7,6 +7,8 @@ import java.util.Random;
  */
 public class Block extends Element {
 
+    private static Random randomGenerator = new Random();
+
     public Block(int x) {
         super(20, 50);
         this.x = x;
@@ -31,7 +33,7 @@ public class Block extends Element {
     }
 
     protected void setRandomY() {
-        int randomInt = Block.randomGenerator.nextInt(2);
+        int randomInt = randomGenerator.nextInt(2);
 
         if (randomInt == 0) {
             this.y = 355;

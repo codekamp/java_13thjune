@@ -3,9 +3,6 @@ package Game;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +10,7 @@ import java.util.List;
 /**
  * Created by cerebro on 01/07/16.
  */
-public class OppsDemo implements KeyListener {
-
-    public static Player player;
-
+public class OppsDemo {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,11 +21,9 @@ public class OppsDemo implements KeyListener {
         Dimension dimension1 = new Dimension(800, 450);
         panel.setPreferredSize(dimension1);
         panel.setFocusable(true);
-        panel.addKeyListener(new OppsDemo());
         frame.pack();
 
         frame.setVisible(true);
-        panel.requestFocus();
 
         try {
             Thread.sleep(500);
@@ -39,13 +31,9 @@ public class OppsDemo implements KeyListener {
             System.out.println("sleep function failed");
         }
 
-        Graphics graphics2 = panel.getGraphics();
-        Image tempImage = new BufferedImage(800, 450, BufferedImage.TYPE_INT_RGB);
-        Graphics graphics1 = tempImage.getGraphics();
+        Graphics graphics1 = panel.getGraphics();
 
-
-
-        OppsDemo.player = new Player(400);
+        Player player = new Player(400, 315);
 
         List<Block> blocks = new ArrayList<>();
         blocks.add(new Block(900));
@@ -55,9 +43,7 @@ public class OppsDemo implements KeyListener {
         blocks.add(new Block(1700));
 
         List<Element> elements = new ArrayList<>();
-        elements.add(new Cloud1(600, 100));
-        elements.add(new Cloud2(1000, 150));
-        elements.add(OppsDemo.player);
+        elements.add(player);
         elements.addAll(blocks);
 
         Image grassImage = null;
@@ -76,10 +62,9 @@ public class OppsDemo implements KeyListener {
 
             for (int i = 0; i < blocks.size(); i++) {
                 Block b = blocks.get(i);
-                if (!b.hidden && OppsDemo.player.intersects(b)) {
-                    OppsDemo.player.hitAudio.play();
+                if (!b.hidden && player.intersects(b)) {
                     b.hidden = true;
-                    OppsDemo.player.update(-20, 0);
+                    player.update(-20, 0);
                     break;
                 }
             }
@@ -97,25 +82,6 @@ public class OppsDemo implements KeyListener {
                     graphics1.drawImage(e.image, e.x, e.y, null);
                 }
             }
-
-            graphics2.drawImage(tempImage, 0, 0, null);
         }
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-            OppsDemo.player.jump();
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 }
