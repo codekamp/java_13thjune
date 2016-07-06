@@ -11,6 +11,7 @@ import java.io.IOException;
  */
 public class Resources {
 
+    public static Image menuImage;
     public static Image ballonImage;
     public static Image bombImage;
     public static Image gameOverImage;
@@ -20,6 +21,7 @@ public class Resources {
 
     public static void load() {
         try {
+            Resources.menuImage = ImageIO.read(Resources.class.getResource("images/menu.png"));
             Resources.ballonImage = ImageIO.read(Resources.class.getResource("images/ballon.png"));
             Resources.gameOverImage = ImageIO.read(Resources.class.getResource("images/boom.png"));
             Resources.bombImage = ImageIO.read(Resources.class.getResource("images/bomb.png"));
